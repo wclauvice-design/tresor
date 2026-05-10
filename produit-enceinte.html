@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Enceinte JBL Style - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://img.freepik.com/premium-photo/bluetooth-speaker-smartphone-white-background_237099-95.jpg" alt="Enceinte JBL Style">
+        </div>
+        
+        <div class="info-produit">
+            <h1>Enceinte JBL Style</h1>
+            <p class="marque">Marque : SoundWave</p>
+            <div class="etoiles">⭐⭐⭐⭐⭐ (312 avis)</div>
+            <p class="prix-detail"><strong>49€</strong></p>
+            <p class="description">
+                Enceinte portable Bluetooth avec son puissant et basses profondes.
+                Étanche IPX7 pour toutes vos aventures.
+            </p>
+            <ul class="caracteristiques">
+                <li>🔊 Son 360° puissant</li>
+                <li>💧 Étanche IPX7</li>
+                <li>🔋 12h autonomie</li>
+                <li>📡 Bluetooth 5.0</li>
+                <li>🎒 Design portable</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "Enceinte JBL Style";
+            let prix = 49;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chaussures Running Pro - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://images.squarespace-cdn.com/content/v1/50d5be95e4b0d4d16b989dfb/1543179692442-QX1JZY5281Z96B5TDOZ3/070918_AsicsTiger_RunningShoes_78740042-E_WebWM.jpg" alt="Chaussures Running Pro">
+        </div>
+        
+        <div class="info-produit">
+            <h1>Chaussures Running Pro</h1>
+            <p class="marque">Marque : RunFast</p>
+            <div class="etoiles">⭐⭐⭐⭐⭐ (198 avis)</div>
+            <p class="prix-detail"><strong>89€</strong></p>
+            <p class="description">
+                Chaussures de running légères avec technologie d'amorti Gel.
+                Confort maximal pour vos sessions de course.
+            </p>
+            <ul class="caracteristiques">
+                <li>👟 Amorti Gel avancé</li>
+                <li>💨 Mesh respirant</li>
+                <li>🏃 Semelle légère</li>
+                <li>🦶 Soutien cheville</li>
+                <li>🌧️ Semelle anti-dérapante</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "Chaussures Running Pro";
+            let prix = 89;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>

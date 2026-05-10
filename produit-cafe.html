@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine à Café Expresso - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://www.shutterstock.com/image-photo/espresso-machine-cup-coffee-isolated-600nw-2444684123.jpg" alt="Machine à Café Expresso">
+        </div>
+        
+        <div class="info-produit">
+            <h1>Machine à Café Expresso</h1>
+            <p class="marque">Marque : BaristaPro</p>
+            <div class="etoiles">⭐⭐⭐⭐ (112 avis)</div>
+            <p class="prix-detail"><strong>159€</strong></p>
+            <p class="description">
+                Machine expresso semi-automatique avec pression 15 bars et mousseur à lait.
+                Café de qualité professionnelle chez vous.
+            </p>
+            <ul class="caracteristiques">
+                <li>☕ Pression 15 bars</li>
+                <li>🥛 Mousseur à lait intégré</li>
+                <li>🔧 Pompe italienne</li>
+                <li>💧 Réservoir 1.5L</li>
+                <li>🧽 Nettoyage facile</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "Machine à Café Expresso";
+            let prix = 159;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Smartwatch Fit - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://img.freepik.com/free-vector/smart-watch-realistic-image-black_1284-11873.jpg?semt=ais_hybrid&w=740&q=80" alt="Smartwatch Fit">
+        </div>
+        
+        <div class="info-produit">
+            <h1>Smartwatch Fit</h1>
+            <p class="marque">Marque : FitTech</p>
+            <div class="etoiles">⭐⭐⭐⭐ (167 avis)</div>
+            <p class="prix-detail"><strong>129€</strong></p>
+            <p class="description">
+                Montre connectée avec suivi cardiaque, GPS intégré et autonomie de 7 jours.
+                Votre compagnon santé au quotidien.
+            </p>
+            <ul class="caracteristiques">
+                <li>❤️ Cardiofréquencemètre</li>
+                <li>📍 GPS intégré</li>
+                <li>🏊 Étanche 50m</li>
+                <li>🔋 7 jours autonomie</li>
+                <li>📱 Notifications smartphone</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "Smartwatch Fit";
+            let prix = 129;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>
