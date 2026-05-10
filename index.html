@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trésor Empire — Votre marketplace de confiance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Produit ajouté au panier !</div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher un produit..." id="search-input">
+            <button onclick="rechercher()">🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Bienvenue sur Trésor Empire</h1>
+        <p>Les meilleurs produits aux meilleurs prix, livrés chez vous</p>
+    </header>
+
+    <!-- Filtres -->
+    <div class="filtres">
+        <button class="filtre-btn active" onclick="filtrer('tous')">Tous</button>
+        <button class="filtre-btn" onclick="filtrer('electronique')">Électronique</button>
+        <button class="filtre-btn" onclick="filtrer('maison')">Maison</button>
+        <button class="filtre-btn" onclick="filtrer('sport')">Sport</button>
+        <button class="filtre-btn" onclick="filtrer('mode')">Mode</button>
+    </div>
+
+    <!-- Panier résumé -->
+    <div class="panier-resume">
+        🛒 <span id="compteur">0</span> articles | Total : <span id="total">0</span>€
+    </div>
+    <div id="liste-panier" class="liste-panier"></div>
+
+    <!-- Produits -->
+    <h2 class="section-titre">Nos produits</h2>
+    
+    <div class="produits">
+
+        <div class="carte" data-nom="Smartphone X200" data-prix="299" data-categorie="electronique">
+            <a href="produit-smartphone.html" class="lien-produit">
+                <img src="https://img.freepik.com/premium-photo/smartphone-with-blank-white-screen-isolated-white-background_1299032-18692.jpg?semt=ais_hybrid&w=740&q=80" alt="Smartphone X200" class="image-produit">
+                <h3>Smartphone X200</h3>
+                <p class="desc">Écran OLED 6.7", 128Go, 5G</p>
+                <p class="prix"><strong>299€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Gaming PC Pro" data-prix="899" data-categorie="electronique">
+            <a href="produit-gamingpc.html" class="lien-produit">
+                <img src="https://www.digitalstorm.com/img/desktop-gaming-pcs.webp" alt="Gaming PC Pro" class="image-produit">
+                <h3>Gaming PC Pro</h3>
+                <p class="desc">RTX 4070, i7-13700K, 32Go RAM</p>
+                <p class="prix"><strong>899€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="HP OmniStudio X27" data-prix="699" data-categorie="electronique">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://crdms.images.consumerreports.org/f_auto,w_1200/prod/products/cr/models/415533-all-in-one-desktops-hp-omnistudio-x-27-full-hd-touch-screen-all-in-one-10041158.png" alt="HP OmniStudio" class="image-produit">
+                <h3>HP OmniStudio X27</h3>
+                <p class="desc">27" Full HD tactile, tout-en-un</p>
+                <p class="prix"><strong>699€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Casque Bluetooth Pro" data-prix="79" data-categorie="electronique">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://www.shutterstock.com/image-photo/headphones-isolated-on-background-white-260nw-2641665609.jpg" alt="Casque Bluetooth" class="image-produit">
+                <h3>Casque Bluetooth Pro</h3>
+                <p class="desc">30h autonomie, réduction bruit</p>
+                <p class="prix"><strong>79€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Machine à Café Expresso" data-prix="159" data-categorie="maison">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://www.shutterstock.com/image-photo/espresso-machine-cup-coffee-isolated-600nw-2444684123.jpg" alt="Machine à café" class="image-produit">
+                <h3>Machine à Café Expresso</h3>
+                <p class="desc">15 bars, mousseur intégré</p>
+                <p class="prix"><strong>159€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Chaussures Running Pro" data-prix="89" data-categorie="sport">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://images.squarespace-cdn.com/content/v1/50d5be95e4b0d4d16b989dfb/1543179692442-QX1JZY5281Z96B5TDOZ3/070918_AsicsTiger_RunningShoes_78740042-E_WebWM.jpg" alt="Chaussures Running" class="image-produit">
+                <h3>Chaussures Running Pro</h3>
+                <p class="desc">Légères, amorti Gel, respirantes</p>
+                <p class="prix"><strong>89€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Smartwatch Fit" data-prix="129" data-categorie="electronique">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://img.freepik.com/free-vector/smart-watch-realistic-image-black_1284-11873.jpg?semt=ais_hybrid&w=740&q=80" alt="Smartwatch" class="image-produit">
+                <h3>Smartwatch Fit</h3>
+                <p class="desc">Cardio, GPS, étanche 7j</p>
+                <p class="prix"><strong>129€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+        <div class="carte" data-nom="Enceinte JBL Style" data-prix="49" data-categorie="electronique">
+            <a href="produit.html" class="lien-produit">
+                <img src="https://img.freepik.com/premium-photo/bluetooth-speaker-smartphone-white-background_237099-95.jpg" alt="Enceinte Bluetooth" class="image-produit">
+                <h3>Enceinte JBL Style</h3>
+                <p class="desc">Étanche IPX7, 12h autonomie</p>
+                <p class="prix"><strong>49€</strong></p>
+            </a>
+            <button class="btn-panier">Ajouter au panier</button>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-section">
+            <h4>Trésor Empire</h4>
+            <p>Votre marketplace de confiance depuis 2026.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Liens rapides</h4>
+            <a href="index.html">Accueil</a>
+            <a href="#">Nos produits</a>
+            <a href="#">À propos</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="footer-section">
+            <h4>Service client</h4>
+            <a href="#">Livraison</a>
+            <a href="#">Retours</a>
+            <a href="#">FAQ</a>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <p>📧 contact@tresorempire.com</p>
+            <p>📱 +33 1 23 45 67 89</p>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Trésor Empire. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        // Panier avec localStorage
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+        let total = 0;
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            let listeHTML = '';
+            total = 0;
+
+            for (let nom in panier) {
+                let produit = panier[nom];
+                nombreArticles += produit.quantite;
+                total += produit.prix * produit.quantite;
+                listeHTML += '<p>• ' + nom + ' — ' + produit.prix + '€ x ' + produit.quantite + ' = ' + (produit.prix * produit.quantite) + '€</p>';
+            }
+
+            document.getElementById('compteur').textContent = nombreArticles;
+            document.getElementById('nav-compteur').textContent = nombreArticles;
+            document.getElementById('total').textContent = total;
+            document.getElementById('liste-panier').innerHTML = listeHTML;
+            sauvegarderPanier();
+        }
+
+        function montrerToast(message) {
+            let toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function ajouterAuPanier(event) {
+            let carte = event.target.closest('.carte');
+            let nom = carte.getAttribute('data-nom');
+            let prix = parseInt(carte.getAttribute('data-prix'));
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            montrerToast(nom + ' ajouté ! (' + panier[nom].quantite + 'x)');
+        }
+
+        // Attache les boutons
+        let boutons = document.querySelectorAll('.btn-panier');
+        boutons.forEach(function(btn) {
+            btn.addEventListener('click', ajouterAuPanier);
+        });
+
+        // Filtres
+        function filtrer(categorie) {
+            let cartes = document.querySelectorAll('.carte');
+            let boutonsFiltre = document.querySelectorAll('.filtre-btn');
+
+            boutonsFiltre.forEach(function(btn) {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(categorie)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            cartes.forEach(function(carte) {
+                if (categorie === 'tous' || carte.getAttribute('data-categorie') === categorie) {
+                    carte.style.display = 'block';
+                } else {
+                    carte.style.display = 'none';
+                }
+            });
+        }
+
+        // Recherche
+        function rechercher() {
+            let recherche = document.getElementById('search-input').value.toLowerCase();
+            let cartes = document.querySelectorAll('.carte');
+
+            cartes.forEach(function(carte) {
+                let nom = carte.getAttribute('data-nom').toLowerCase();
+                if (nom.includes(recherche)) {
+                    carte.style.display = 'block';
+                } else {
+                    carte.style.display = 'none';
+                }
+            });
+        }
+
+        // Init
+        mettreAJourPanier();
+    </script>
+
+</body>
+</html>

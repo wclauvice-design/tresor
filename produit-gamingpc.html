@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaming PC Pro - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://www.digitalstorm.com/img/desktop-gaming-pcs.webp" alt="Gaming PC Pro">
+        </div>
+        
+        <div class="info-produit">
+            <h1>Gaming PC Pro</h1>
+            <p class="marque">Marque : GameTech</p>
+            <div class="etoiles">⭐⭐⭐⭐⭐ (89 avis)</div>
+            <p class="prix-detail"><strong>899€</strong></p>
+            <p class="description">
+                PC gaming haut de gamme avec RTX 4070, processeur i7-13700K et 32Go RAM.
+                Performances exceptionnelles pour le gaming 4K.
+            </p>
+            <ul class="caracteristiques">
+                <li>🎮 RTX 4070 12Go</li>
+                <li>⚡ Intel i7-13700K</li>
+                <li>💾 32Go DDR5 RAM</li>
+                <li>💿 1To SSD NVMe</li>
+                <li>❄️ Watercooling RGB</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter" data-nom="Gaming PC Pro" data-prix="899">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "Gaming PC Pro";
+            let prix = 899;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>
