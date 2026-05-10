@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>HP OmniStudio X27 - Trésor Empire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🛒 Trésor Empire</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="#">👤 Compte</a>
+            <a href="#">🛒 Panier (<span id="nav-compteur">0</span>)</a>
+        </div>
+    </nav>
+
+    <div class="detail-produit">
+        <div class="image-grand">
+            <img src="https://crdms.images.consumerreports.org/f_auto,w_1200/prod/products/cr/models/415533-all-in-one-desktops-hp-omnistudio-x-27-full-hd-touch-screen-all-in-one-10041158.png" alt="HP OmniStudio X27">
+        </div>
+        
+        <div class="info-produit">
+            <h1>HP OmniStudio X27</h1>
+            <p class="marque">Marque : HP</p>
+            <div class="etoiles">⭐⭐⭐⭐ (76 avis)</div>
+            <p class="prix-detail"><strong>699€</strong></p>
+            <p class="description">
+                Tout-en-un élégant avec écran tactile 27" Full HD. Parfait pour le bureau
+                et la maison avec son design minimaliste.
+            </p>
+            <ul class="caracteristiques">
+                <li>🖥️ Écran 27" Full HD tactile</li>
+                <li>⚡ Intel Core i5-13400</li>
+                <li>💾 16Go DDR4 RAM</li>
+                <li>💿 512Go SSD</li>
+                <li>🎥 Webcam intégrée</li>
+            </ul>
+            <button class="btn-acheter">Acheter maintenant</button>
+            <button class="btn-ajouter">Ajouter au panier</button>
+        </div>
+    </div>
+
+    <script>
+        let panier = JSON.parse(localStorage.getItem('panier')) || {};
+
+        function sauvegarderPanier() {
+            localStorage.setItem('panier', JSON.stringify(panier));
+        }
+
+        function mettreAJourPanier() {
+            let nombreArticles = 0;
+            for (let nom in panier) {
+                nombreArticles += panier[nom].quantite;
+            }
+            let navCompteur = document.getElementById('nav-compteur');
+            if (navCompteur) navCompteur.textContent = nombreArticles;
+            sauvegarderPanier();
+        }
+
+        function ajouterAuPanier() {
+            let nom = "HP OmniStudio X27";
+            let prix = 699;
+
+            if (panier[nom]) {
+                panier[nom].quantite += 1;
+            } else {
+                panier[nom] = { prix: prix, quantite: 1 };
+            }
+
+            mettreAJourPanier();
+            alert(nom + ' ajouté ! Quantité : ' + panier[nom].quantite);
+        }
+
+        let btn = document.querySelector('.btn-ajouter');
+        if (btn) btn.addEventListener('click', ajouterAuPanier);
+
+        mettreAJourPanier();
+    </script>
+</body>
+</html>
